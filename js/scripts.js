@@ -6,7 +6,8 @@ Dice.prototype.roll = function() {
   this.value = Math.ceil(Math.random() * 6 + 0.00001);
 }
 
-function Player() {
+function Player(name) {
+  this.name = name;
   this.score = 0;
   this.turnTotal = 0;
 }
@@ -19,8 +20,8 @@ Player.prototype.addTurnTotalToScore = function() {
 $(function() {
 
   var die = new Dice();
-  var player1 = new Player();
-  var player2 = new Player();
+  var player1 = new Player("player 1");
+  var player2 = new Player("player 2");
   var isP1Turn = true;
 
   updateGame();
@@ -28,8 +29,21 @@ $(function() {
   $("button#roll").click(function() {
     die.roll();
     if(die.value == 1) {
+      getActivePlayer().turnTotal = 0;
       isP1Turn = !isP1Turn;
+    } else {
+      getActivePlayer().turnTotal += die.value;
     }
+    updateGame();
+  });
+
+  $("button#hold").click(function() {
+    getActivePlayer().addTurnTotalToScore();
+    getActivePlayer().turnTotal = 0;
+    if (getActivePlayer().score >= 30) {
+      alert(getActivePlayer().name + " is the winner!");
+    }
+    isP1Turn = !isP1Turn;
     updateGame();
   });
 
@@ -45,6 +59,14 @@ $(function() {
     } else {
       $("#p2-turn").text("<--");
       $("#p1-turn").empty();
+    }
+  }
+
+  function getActivePlayer() {
+    if(isP1Turn) {
+      return player1;
+    } else {
+      return player2;
     }
   }
 

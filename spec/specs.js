@@ -18,7 +18,8 @@ describe('Dice', function() {
 describe('Player', function() {
   describe('new', function() {
     it("creates a new player", function() {
-      var testPlayer = new Player();
+      var testPlayer = new Player("Johnny");
+      expect(testPlayer.name).to.equal("Johnny");
       expect(testPlayer.score).to.equal(0);
       expect(testPlayer.turnTotal).to.equal(0);
     });
