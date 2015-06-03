@@ -1,10 +1,4 @@
-// Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":
-// If the player rolls a 1, they score nothing and it becomes the next player's turn.
-// If the player rolls any other number, it is added to their turn total and the player's turn continues.
-// If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.
-
 describe('Dice', function() {
-
   describe('new', function() {
     it("creates a new instance of the Dice class", function() {
       var testDice = new Dice();
@@ -19,12 +13,9 @@ describe('Dice', function() {
       expect(testDice.value).to.be.within(1, 6);
     });
   });
-
-
 });
 
 describe('Player', function() {
-
   describe('new', function() {
     it("creates a new player", function() {
       var testPlayer = new Player();
@@ -41,5 +32,4 @@ describe('Player', function() {
       expect(testPlayer.score).to.equal(6);
     });
   });
-
 });

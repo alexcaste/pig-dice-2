@@ -2,9 +2,42 @@
 
 <html>
   <head>
-    <title></title>
-  </head>
-  <body>
+    <title>Pig Dice</title>
 
+    <!-- bootstrap styles -->
+   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+   <!-- custom styles -->
+   <link rel="stylesheet" href="css/styles.css" />
+   <!-- jQuery -->
+   <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
+   <!-- bootstrap js -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+   <!-- Custom Scripts -->
+   <script src='js/scripts.js'></script>
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <h1>Pig Dice</h1>
+
+
+
+
+      <h3>Player 1<span id="p1-turn"></span></h3>
+      <h5>Score: <span id="p1-score"></span></h5>
+      <h5>Turn Total: <span id="p1-turn-total"></span></h5>
+
+      <h3>Player 2<span id="p2-turn"></span></h3>
+      <h5>Score: <span id="p2-score"></span></h5>
+      <h5>Turn Total: <span id="p2-turn-total"></span></h5>
+
+      <h2>Die Roll: <span id="roll-result"></span></h2>
+      <button id="roll" class="btn btn-primary">Roll!</button>
+      <button id="hold" class="btn btn-success">Hold</button>
+
+    </div>
   </body>
+
 </html>
