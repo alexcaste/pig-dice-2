@@ -19,6 +19,13 @@ Player.prototype.addTurnTotalToScore = function() {
 
 $(function() {
 
+  var dieFaces = ["http://upload.wikimedia.org/wikipedia/commons/thumb/4/40/U%2B2680.svg/200px-U%2B2680.svg.png",
+                  "http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/U%2B2681.svg/200px-U%2B2681.svg.png",
+                  "http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/U%2B2682.svg/200px-U%2B2682.svg.png",
+                  "http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/U%2B2683.svg/200px-U%2B2683.svg.png",
+                  "http://upload.wikimedia.org/wikipedia/commons/thumb/4/42/U%2B2684.svg/200px-U%2B2684.svg.png",
+                  "http://upload.wikimedia.org/wikipedia/commons/thumb/8/82/U%2B2685.svg/200px-U%2B2685.svg.png"]
+
   var die = new Dice();
   var player1 = new Player("player 1");
   var player2 = new Player("player 2");
@@ -31,6 +38,8 @@ $(function() {
     if(die.value == 1) {
       getActivePlayer().turnTotal = 0;
       isP1Turn = !isP1Turn;
+      $("#p1-panel").toggleClass("panel-primary panel-default");
+      $("#p2-panel").toggleClass("panel-primary panel-default");
     } else {
       getActivePlayer().turnTotal += die.value;
     }
@@ -44,11 +53,13 @@ $(function() {
       alert(getActivePlayer().name + " is the winner!");
     }
     isP1Turn = !isP1Turn;
+    $("#p1-panel").toggleClass("panel-primary panel-default");
+    $("#p2-panel").toggleClass("panel-primary panel-default");
     updateGame();
   });
 
   function updateGame() {
-    $("#roll-result").text(die.value);
+    $("#roll-result").html('<img src="' + dieFaces[die.value - 1] + '">');
     $("#p1-score").text(player1.score);
     $("#p1-turn-total").text(player1.turnTotal);
     $("#p2-score").text(player2.score);
