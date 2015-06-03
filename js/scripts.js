@@ -1,3 +1,5 @@
+// Raw JS
+
 function Dice() {
   this.value = 1;
 }
@@ -16,6 +18,7 @@ Player.prototype.addTurnTotalToScore = function() {
   this.score += this.turnTotal;
 }
 
+// jQuery
 
 $(function() {
 
@@ -85,13 +88,6 @@ $(function() {
     $("#p1-turn-total").text(player1.turnTotal);
     $("#p2-score").text(player2.score);
     $("#p2-turn-total").text(player2.turnTotal);
-    if (isP1Turn) {
-      $("#p1-turn").text("<--");
-      $("#p2-turn").empty();
-    } else {
-      $("#p2-turn").text("<--");
-      $("#p1-turn").empty();
-    }
   }
 
   function getActivePlayer() {
