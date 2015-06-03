@@ -19,6 +19,8 @@ Player.prototype.addTurnTotalToScore = function() {
 
 $(function() {
 
+  var scoreToWin = 10;
+
   var die = new Dice();
   var player1 = new Player("player 1");
   var player2 = new Player("player 2");
@@ -40,11 +42,18 @@ $(function() {
   $("button#hold").click(function() {
     getActivePlayer().addTurnTotalToScore();
     getActivePlayer().turnTotal = 0;
-    if (getActivePlayer().score >= 100) {
-      alert(getActivePlayer().name + " is the winner!");
+    if (getActivePlayer().score >= scoreToWin) {
+      $("#p1-buttons").hide();
+      $("#p1-buttons").hide();
+      $("#p1-buttons-disabled").show();
+      $("#p1-buttons-disabled").show();
+      $("#roll-result").hide();
+      $("#roll-result").html('<a href="#" onclick="window.location.reload(true);"><img src="' + './dice_imgs/again.png' + '"></a>');
+      $("#roll-result").fadeIn(1000);
+    } else {
+      switchTurn();
+      updateGame();
     }
-    switchTurn();
-    updateGame();
   });
 
   function switchTurn() {
