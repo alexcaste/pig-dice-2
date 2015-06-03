@@ -19,13 +19,6 @@ Player.prototype.addTurnTotalToScore = function() {
 
 $(function() {
 
-  var dieFaces = ["http://upload.wikimedia.org/wikipedia/commons/thumb/4/40/U%2B2680.svg/200px-U%2B2680.svg.png",
-                  "http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/U%2B2681.svg/200px-U%2B2681.svg.png",
-                  "http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/U%2B2682.svg/200px-U%2B2682.svg.png",
-                  "http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/U%2B2683.svg/200px-U%2B2683.svg.png",
-                  "http://upload.wikimedia.org/wikipedia/commons/thumb/4/42/U%2B2684.svg/200px-U%2B2684.svg.png",
-                  "http://upload.wikimedia.org/wikipedia/commons/thumb/8/82/U%2B2685.svg/200px-U%2B2685.svg.png"]
-
   var die = new Dice();
   var player1 = new Player("player 1");
   var player2 = new Player("player 2");
@@ -37,9 +30,7 @@ $(function() {
     die.roll();
     if(die.value == 1) {
       getActivePlayer().turnTotal = 0;
-      isP1Turn = !isP1Turn;
-      $("#p1-panel").toggleClass("panel-primary panel-default");
-      $("#p2-panel").toggleClass("panel-primary panel-default");
+      switchTurn();
     } else {
       getActivePlayer().turnTotal += die.value;
     }
@@ -49,17 +40,27 @@ $(function() {
   $("button#hold").click(function() {
     getActivePlayer().addTurnTotalToScore();
     getActivePlayer().turnTotal = 0;
-    if (getActivePlayer().score >= 30) {
+    if (getActivePlayer().score >= 100) {
       alert(getActivePlayer().name + " is the winner!");
     }
-    isP1Turn = !isP1Turn;
-    $("#p1-panel").toggleClass("panel-primary panel-default");
-    $("#p2-panel").toggleClass("panel-primary panel-default");
+    switchTurn();
     updateGame();
   });
 
+  function switchTurn() {
+    isP1Turn = !isP1Turn;
+    $("#p1-panel").toggleClass("panel-primary panel-default");
+    $("#p2-panel").toggleClass("panel-primary panel-default");
+    $("#p1-buttons").toggle();
+    $("#p1-buttons-disabled").toggle();
+    $("#p2-buttons").toggle();
+    $("#p2-buttons-disabled").toggle();
+  }
+
   function updateGame() {
-    $("#roll-result").html('<img src="' + dieFaces[die.value - 1] + '">');
+    $("#roll-result").hide();
+    $("#roll-result").html('<img src="' + './dice_imgs/' + die.value + '.png' + '">');
+    $("#roll-result").fadeIn(1000);
     $("#p1-score").text(player1.score);
     $("#p1-turn-total").text(player1.turnTotal);
     $("#p2-score").text(player2.score);
