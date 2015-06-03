@@ -19,7 +19,7 @@ Player.prototype.addTurnTotalToScore = function() {
 
 $(function() {
 
-  var scoreToWin = 10;
+  var scoreToWin = 100;
 
   var die = new Dice();
   var player1 = new Player("player 1");
@@ -50,6 +50,17 @@ $(function() {
       $("#roll-result").hide();
       $("#roll-result").html('<a href="#" onclick="window.location.reload(true);"><img src="' + './dice_imgs/again.png' + '"></a>');
       $("#roll-result").fadeIn(1000);
+      $("#p1-score").text(player1.score);
+      $("#p1-turn-total").text(player1.turnTotal);
+      $("#p2-score").text(player2.score);
+      $("#p2-turn-total").text(player2.turnTotal);
+      if(isP1Turn) {
+        $("#p1-panel-header").text("You Win!");
+        $("#p2-panel-header").text("You Lose...");
+      } else {
+        $("#p2-panel-header").text("You Win!");
+        $("#p1-panel-header").text("You Lose...");
+      }
     } else {
       switchTurn();
       updateGame();
