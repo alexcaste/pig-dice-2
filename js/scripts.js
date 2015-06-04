@@ -24,15 +24,23 @@ $(function() {
 
   var scoreToWin = 100;
 
-  var die = new Die();
+  var die1 = new Die();
   var die2 = new Die();
   die2.value = 2;
+
+
+  // var randomDiceArray = [];
+  // var randomDiceArray2 = [];
+  //
+  // var die3 = new Die();
+  // var die4 = new Die();
 
 
   var player1 = new Player("player 1");
   var player2 = new Player("player 2");
   var isP1Turn = true;
   var twoDiceGame = false;
+  var bigPigGame = false;
 
   p1PanelToggle();
 
@@ -49,10 +57,19 @@ $(function() {
     updateGame();
   });
 
+  $("button#big-pig-game").click(function(){
+    $("#game-chooser-buttons").hide();
+    p1PanelToggle();
+    bigPigGame = true;
+    updateGame();
+  });
+
 
   $("button#roll").click(function() {
     if (twoDiceGame === true) {
       twoDieRoll();
+    } else if (bigPigGame === true){
+      bigPigRoll();
     } else {
       oneDieRoll();
     }
@@ -103,12 +120,14 @@ $(function() {
   }
 
   function updateGame() {
-
+    // resetRandom();
     $("#roll-result").hide();
-    $("#roll-result").html('<img src="' + './dice_imgs/' + die.value + '.png' + '">');
+    $("#roll-result").html('<img src="' + './dice_imgs/' + die1.value + '.png' + '">');
+    // $("#roll-result").html('<img src="' + './dice_imgs/again.png' + '">');
+
     $("#roll-result").fadeIn(250);
 
-    if (twoDiceGame === true) {
+    if (twoDiceGame === true || bigPigGame === true) {
       twoDice();
     }
 
@@ -124,35 +143,73 @@ $(function() {
     $("#roll-result2").fadeIn(250);
   }
 
-  function oneDieRoll() {
-    die.roll();
+  // function randomDice() {
+  //   $("#roll-result").hide();
+  //   $("#roll-result2").hide();
+  //   $("#random-dice").show();
+  //   $("#random-dice").html('<img src="' + './dice_imgs/' + die3.value + '.png' + '">');
+  //   $("#random-dice").fadeIn(1000);
+  // }
+  //
+  // function resetRandom() {
+  //   randomDiceArray = [];
+  //   randomDiceArray2 = [];
+  //
+  // }
 
-    if(die.value == 1) {
+
+  function oneDieRoll() {
+    // diceImage();
+
+    die1.roll();
+
+    if(die1.value == 1) {
       getActivePlayer().turnTotal = 0;
       switchTurn();
     } else {
-      getActivePlayer().turnTotal += die.value;
+      getActivePlayer().turnTotal += die1.value;
     }
     updateGame();
+
   }
 
   function twoDieRoll() {
     $('button#hold').prop('disabled', false);
-    die.roll();
+    die1.roll();
     die2.roll();
 
-    if(die.value == 1 && die2.value == 1) {
+    if(die1.value == 1 && die2.value == 1) {
       getActivePlayer().turnTotal = 0;
       getActivePlayer().score = 0;
       switchTurn();
-    } else if (die.value == 1 || die2.value == 1) {
+    } else if (die1.value == 1 || die2.value == 1) {
       getActivePlayer().turnTotal = 0;
       switchTurn();
-    } else if (die.value == die2.value) {
-      getActivePlayer().turnTotal += die.value + die2.value;
+    } else if (die1.value == die2.value) {
+      getActivePlayer().turnTotal += die1.value + die2.value;
       $('button#hold').prop('disabled', true);
     } else {
-      getActivePlayer().turnTotal += die.value + die2.value;
+      getActivePlayer().turnTotal += die1.value + die2.value;
+    }
+    updateGame();
+  }
+
+  function bigPigRoll() {
+    $('button#hold').prop('disabled', false);
+    die1.roll();
+    die2.roll();
+
+    if(die1.value == 1 && die2.value == 1) {
+      getActivePlayer().turnTotal += 25;
+      $('button#hold').prop('disabled', true);
+    } else if (die1.value == 1 || die2.value == 1) {
+      getActivePlayer().turnTotal = 0;
+      switchTurn();
+    } else if (die1.value == die2.value) {
+      getActivePlayer().turnTotal += 2*(die1.value + die2.value);
+      $('button#hold').prop('disabled', true);
+    } else {
+      getActivePlayer().turnTotal += die1.value + die2.value;
     }
     updateGame();
   }
@@ -171,13 +228,24 @@ $(function() {
     }
   }
 
-  // function diceRollImage() {
-  //   if (twoDiceGame === true) {
-  //     $("#roll-result2").html('<img src="' + './dice_imgs/' + die2.value + '.png' + '">');
+  // function randomDice() {
+  //   var dice = Math.ceil(Math.random() * 10 + 0.00001);
+  //   for (var x = 0; x <= dice; x++) {
+  //     var die = new Die();
+  //     die.roll();
+  //     var roll = die.value;
+  //     randomDiceArray.push(roll);
   //   }
+  //   return randomDiceArray;
+  // }
   //
-  //   $("#roll-result").html('<img src="' + './dice_imgs/' + die2.value + '.png' + '">');
-
-  }
+  // function diceImage() {
+  //   randomDiceArray = randomDice();
+  //   debugger;
+  //   for (var x = 0; x < randomDiceArray.length; x++){
+  //     die3.value = randomDiceArray[x];
+  //     randomDice();
+  //   }
+  // }
 
 });
