@@ -8,6 +8,7 @@
    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
    <!-- custom styles -->
    <link rel="stylesheet" href="css/styles.css" />
+   <link rel="stylesheet" href="css/animate.min.css">
    <!-- jQuery -->
    <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
    <!-- bootstrap js -->
@@ -29,8 +30,8 @@
               <p>Turn Total: <span id="p1-turn-total"></span></p>
 
               <div id="p1-buttons">
-                <button id="roll" class="btn btn-primary">Roll!</button>
-                <button id="hold" class="btn btn-success">Hold</button>
+                <button id="roll" class="btn btn-primary animated infinite pulse">Roll!</button>
+                <button id="hold" class="btn btn-success animated infinite pulse">Hold</button>
               </div>
               <div id="p1-buttons-disabled">
                 <fieldset disabled>
@@ -44,7 +45,17 @@
         </div>
 
         <div class="col-md-4">
+          <center>
+            <div id="game-chooser-buttons" class="animated zoomIn">
+              <button id="standard-game" class="btn btn-info animated infinite pulse">Standard Pig</button>
+              <br>
+              <br>
+              <button id="two-dice-game" class="btn btn-info animated infinite pulse">Two-Dice Pig</button>
+            </div>
+          </center>
           <center><span id="roll-result"></span></center>
+          <center><span id="roll-result2"></span></center>
+
         </div>
 
         <div class="col-md-4">
@@ -55,8 +66,8 @@
               <p>Turn Total: <span id="p2-turn-total"></span></p>
 
               <div id="p2-buttons">
-                <button id="roll" class="btn btn-primary">Roll!</button>
-                <button id="hold" class="btn btn-success">Hold</button>
+                <button id="roll" class="btn btn-primary animated infinite pulse">Roll!</button>
+                <button id="hold" class="btn btn-success animated infinite pulse">Hold</button>
               </div>
               <div id="p2-buttons-disabled">
                 <fieldset disabled>
