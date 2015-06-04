@@ -29,11 +29,11 @@ $(function() {
   die2.value = 2;
 
 
-  // var randomDiceArray = [];
-  // var randomDiceArray2 = [];
-  //
-  // var die3 = new Die();
-  // var die4 = new Die();
+  var randomDiceArray = [];
+  var randomDiceArray2 = [];
+
+  var die3 = new Die();
+  var die4 = new Die();
 
 
   var player1 = new Player("player 1");
@@ -120,7 +120,15 @@ $(function() {
   }
 
   function updateGame() {
-    // resetRandom();
+    resetRandom();
+    randomDice();
+    $("#roll-result").hide();
+    $("#roll-result2").hide();
+    $("#random-dice").show();
+    rollDice();
+    dieImg();
+
+    $("#random-dice").hide();
     $("#roll-result").hide();
     $("#roll-result").html('<img src="' + './dice_imgs/' + die1.value + '.png' + '">');
     // $("#roll-result").html('<img src="' + './dice_imgs/again.png' + '">');
@@ -143,24 +151,23 @@ $(function() {
     $("#roll-result2").fadeIn(250);
   }
 
-  // function randomDice() {
-  //   $("#roll-result").hide();
-  //   $("#roll-result2").hide();
-  //   $("#random-dice").show();
-  //   $("#random-dice").html('<img src="' + './dice_imgs/' + die3.value + '.png' + '">');
-  //   $("#random-dice").fadeIn(1000);
-  // }
-  //
-  // function resetRandom() {
-  //   randomDiceArray = [];
-  //   randomDiceArray2 = [];
-  //
-  // }
+  function dieImg() {
+    for (var x=0; x<=randomDiceArray2.length; x++){
+      var str = randomDiceArray2[x];
+      $("#roll-result").html(str);
+      $("#roll-result").fadeIn(1000);
 
+    }
+    // $("#roll-result").hide();
+    // $("#roll-result").fadeIn(1000);
+  }
+
+  function resetRandom() {
+    randomDiceArray = [];
+    randomDiceArray2 = [];
+  }
 
   function oneDieRoll() {
-    // diceImage();
-
     die1.roll();
 
     if(die1.value == 1) {
@@ -228,24 +235,25 @@ $(function() {
     }
   }
 
-  // function randomDice() {
-  //   var dice = Math.ceil(Math.random() * 10 + 0.00001);
-  //   for (var x = 0; x <= dice; x++) {
-  //     var die = new Die();
-  //     die.roll();
-  //     var roll = die.value;
-  //     randomDiceArray.push(roll);
-  //   }
-  //   return randomDiceArray;
-  // }
-  //
-  // function diceImage() {
-  //   randomDiceArray = randomDice();
-  //   debugger;
-  //   for (var x = 0; x < randomDiceArray.length; x++){
-  //     die3.value = randomDiceArray[x];
-  //     randomDice();
-  //   }
-  // }
+  function randomDice() {
+    var dice = Math.ceil(Math.random() * 10 + 0.00001);
+    for (var x = 0; x <= dice; x++) {
+      var die = new Die();
+      die.roll();
+      var roll = die.value;
+      randomDiceArray.push(roll);
+    }
+    // return randomDiceArray;
+  }
+
+  function rollDice() {
+    // randomDiceArray = randomDice();
+    for (var x = 0; x < randomDiceArray.length; x++){
+      debugger;
+      die3.value = randomDiceArray[x];
+      var test = '<img src="' + './dice_imgs/' + die3.value + '.png' + '">';
+      randomDiceArray2.push(test);
+    }
+  }
 
 });
