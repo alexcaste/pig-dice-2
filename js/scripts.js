@@ -125,7 +125,7 @@ $(function() {
     $("#roll-result").hide();
     $("#roll-result2").hide();
     $("#random-dice").show();
-    rollDice();
+    // rollDice();
     dieImg();
 
     $("#random-dice").hide();
@@ -145,6 +145,10 @@ $(function() {
     $("#p2-turn-total").text(player2.turnTotal);
   }
 
+  $('#random-dice').load(function(){
+    dieImg();
+  });
+
   function twoDice() {
     $("#roll-result2").hide();
     $("#roll-result2").html('<img src="' + './dice_imgs/' + die2.value + '.png' + '">');
@@ -152,14 +156,11 @@ $(function() {
   }
 
   function dieImg() {
-    for (var x=0; x<=randomDiceArray2.length; x++){
-      var str = randomDiceArray2[x];
-      $("#roll-result").html(str);
-      $("#roll-result").fadeIn(1000);
-
+    for (var x=0; x<randomDiceArray.length; x++){
+      var str = randomDiceArray[x];
+      var test = $("#random-dice").html(str);
+      $("#roll-result").fadeIn(100);
     }
-    // $("#roll-result").hide();
-    // $("#roll-result").fadeIn(1000);
   }
 
   function resetRandom() {
@@ -238,22 +239,20 @@ $(function() {
   function randomDice() {
     var dice = Math.ceil(Math.random() * 10 + 0.00001);
     for (var x = 0; x <= dice; x++) {
-      var die = new Die();
-      die.roll();
-      var roll = die.value;
-      randomDiceArray.push(roll);
+      var num = Math.ceil(Math.random() * 6 + 0.00001);
+      var link = '<img src="' + './dice_imgs/' + num + '.png' + '">';
+      randomDiceArray.push(link);
     }
     // return randomDiceArray;
   }
 
-  function rollDice() {
-    // randomDiceArray = randomDice();
-    for (var x = 0; x < randomDiceArray.length; x++){
-      debugger;
-      die3.value = randomDiceArray[x];
-      var test = '<img src="' + './dice_imgs/' + die3.value + '.png' + '">';
-      randomDiceArray2.push(test);
-    }
-  }
+  // function rollDice() {
+  //   // randomDiceArray = randomDice();
+  //   for (var x = 0; x < randomDiceArray.length; x++){
+  //     var num = randomDiceArray[x];
+  //     var test = '<img src="' + './dice_imgs/' + die3.value + '.png' + '">';
+  //     randomDiceArray2.push(test);
+  //   }
+  // }
 
 });
